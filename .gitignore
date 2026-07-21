@@ -1,0 +1,7 @@
+# Dependencies and generated files.
+/node_modules/
+/dist/
+
+# Assignment reference documents kept outside version control.
+/A1 - Design Report - RuiqiWang36668095 (1).pdf
+/chatgpt-export_*.md
