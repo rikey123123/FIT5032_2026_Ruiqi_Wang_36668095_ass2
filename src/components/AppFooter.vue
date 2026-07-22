@@ -1,6 +1,8 @@
 <template>
   <footer class="site-footer">
-    <p>CareBridge Foundation</p>
-    <RouterLink to="/help">Help</RouterLink>
+    <div class="site-footer__content">
+      <p>CareBridge Foundation</p>
+      <RouterLink to="/help">Help</RouterLink>
+    </div>
   </footer>
 </template>

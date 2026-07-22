@@ -13,16 +13,19 @@ const navigationLinks = [
 
 <template>
   <header class="site-header">
-    <RouterLink class="site-name" to="/">CareBridge</RouterLink>
+    <div class="site-header__content">
+      <RouterLink class="site-name" to="/">CareBridge</RouterLink>
 
-    <nav aria-label="Main navigation">
-      <RouterLink
-        v-for="link in navigationLinks"
-        :key="link.to"
-        :to="link.to"
-      >
-        {{ link.label }}
-      </RouterLink>
-    </nav>
+      <nav class="site-navigation" aria-label="Main navigation">
+        <RouterLink
+          v-for="link in navigationLinks"
+          :key="link.to"
+          :to="link.to"
+          class="site-navigation__link"
+        >
+          {{ link.label }}
+        </RouterLink>
+      </nav>
+    </div>
   </header>
 </template>
