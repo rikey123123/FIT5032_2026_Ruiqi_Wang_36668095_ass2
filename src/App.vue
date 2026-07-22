@@ -1,6 +1,16 @@
 <template>
-  <main>
-    <h1>CareBridge</h1>
-    <p>The Vue 3 project is ready.</p>
-  </main>
+  <div class="app-shell">
+    <AppHeader />
+
+    <main class="page-content">
+      <RouterView />
+    </main>
+
+    <AppFooter />
+  </div>
 </template>
+
+<script setup>
+import AppFooter from './components/AppFooter.vue'
+import AppHeader from './components/AppHeader.vue'
+</script>
