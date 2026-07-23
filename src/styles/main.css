@@ -38,16 +38,22 @@
   gap: 0.25rem;
 }
 
-.site-navigation__link {
+.site-navigation__link,
+.site-navigation__button {
+  border: 0;
   border-bottom: 3px solid transparent;
+  background: transparent;
   color: #24312b;
+  cursor: pointer;
+  font: inherit;
   padding: 0.45rem 0.35rem;
   text-align: center;
   text-decoration: none;
 }
 
 .site-navigation__link:hover,
-.site-navigation__link.router-link-active {
+.site-navigation__link.router-link-active,
+.site-navigation__button:hover {
   border-bottom-color: #1f6b57;
   color: #14513f;
 }
@@ -156,19 +162,25 @@
   color: #14513f;
 }
 
-.primary-button {
+.primary-button,
+.primary-link {
   justify-self: start;
+  display: inline-block;
   min-height: 2.75rem;
   border: 1px solid #14513f;
   border-radius: 4px;
   background: #1f6b57;
   color: #ffffff;
   cursor: pointer;
+  font: inherit;
   padding: 0.5rem 0.85rem;
+  text-decoration: none;
 }
 
-.primary-button:hover {
+.primary-button:hover,
+.primary-link:hover {
   background: #14513f;
+  color: #ffffff;
 }
 
 .page-content .results-count {
@@ -283,6 +295,36 @@
 
 .resource-detail__content p + p {
   margin-top: 1.25rem;
+}
+
+.account-details {
+  display: grid;
+  max-width: 38rem;
+  margin: 0 0 1.5rem;
+  border-top: 1px solid #d1ddd5;
+}
+
+.account-details > div {
+  display: grid;
+  gap: 0.2rem;
+  border-bottom: 1px solid #d1ddd5;
+  padding: 0.9rem 0;
+}
+
+.account-details dt {
+  color: #53645a;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.account-details dd {
+  margin: 0;
+}
+
+.account-page .empty-state {
+  display: grid;
+  gap: 1rem;
+  max-width: 38rem;
 }
 
 .empty-state {
