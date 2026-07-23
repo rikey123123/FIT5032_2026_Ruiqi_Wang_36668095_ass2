@@ -91,8 +91,15 @@
   font-weight: 700;
 }
 
+.form-field {
+  display: grid;
+  gap: 0.35rem;
+  font-weight: 700;
+}
+
 .filter-field input,
-.filter-field select {
+.filter-field select,
+.form-field input {
   width: 100%;
   min-height: 2.75rem;
   border: 1px solid #9fb3a7;
@@ -114,6 +121,53 @@
 }
 
 .filter-clear-button:hover {
+  background: #14513f;
+}
+
+.auth-form {
+  display: grid;
+  max-width: 38rem;
+  gap: 1.1rem;
+  border: 1px solid #d1ddd5;
+  border-radius: 6px;
+  background: #ffffff;
+  padding: 1.25rem;
+}
+
+.field-error {
+  color: #9d3518;
+  font-weight: 400;
+}
+
+.form-message {
+  border-left: 4px solid;
+  padding: 0.75rem;
+}
+
+.form-message--error {
+  border-left-color: #c86430;
+  background: #fff8f4;
+  color: #7a2c16;
+}
+
+.form-message--success {
+  border-left-color: #1f6b57;
+  background: #edf4ee;
+  color: #14513f;
+}
+
+.primary-button {
+  justify-self: start;
+  min-height: 2.75rem;
+  border: 1px solid #14513f;
+  border-radius: 4px;
+  background: #1f6b57;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 0.5rem 0.85rem;
+}
+
+.primary-button:hover {
   background: #14513f;
 }
 
@@ -264,6 +318,10 @@
   .service-grid,
   .resource-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .auth-form {
+    padding: 1.5rem;
   }
 }
 
