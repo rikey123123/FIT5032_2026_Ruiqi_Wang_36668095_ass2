@@ -1,10 +1,13 @@
 import { computed, ref } from 'vue'
 import {
   clearStoredCurrentUser,
+  ensureDemoAdminUser,
   getStoredCurrentUserId,
   getStoredUsers,
   saveCurrentUserId,
 } from '../utils/storage'
+
+ensureDemoAdminUser()
 
 function findCurrentUser() {
   const currentUserId = getStoredCurrentUserId()

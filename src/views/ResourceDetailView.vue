@@ -1,12 +1,13 @@
 <script setup>
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { healthResources } from '../data/resources'
+import { useResources } from '../composables/useResources'
 
 const route = useRoute()
+const { resources } = useResources()
 
 const resource = computed(() => {
-  return healthResources.find((item) => item.id === route.params.id)
+  return resources.value.find((item) => item.id === route.params.id)
 })
 </script>
 

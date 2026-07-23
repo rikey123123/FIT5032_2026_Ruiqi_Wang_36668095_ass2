@@ -1,15 +1,17 @@
 <script setup>
 import { computed, ref } from 'vue'
 import ResourceCard from '../components/ResourceCard.vue'
-import { healthResources, resourceCategories } from '../data/resources'
+import { resourceCategories } from '../data/resources'
+import { useResources } from '../composables/useResources'
 
 const searchTerm = ref('')
 const selectedCategory = ref('All')
+const { resources } = useResources()
 
 const filteredResources = computed(() => {
   const query = searchTerm.value.trim().toLowerCase()
 
-  return healthResources.filter((resource) => {
+  return resources.value.filter((resource) => {
     const matchesCategory =
       selectedCategory.value === 'All' || resource.category === selectedCategory.value
     const searchableText = `${resource.title} ${resource.category} ${resource.summary}`.toLowerCase()

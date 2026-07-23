@@ -9,6 +9,7 @@ import RegisterView from '../views/RegisterView.vue'
 import ResourceDetailView from '../views/ResourceDetailView.vue'
 import ResourcesView from '../views/ResourcesView.vue'
 import SupportView from '../views/SupportView.vue'
+import { useAuth } from '../composables/useAuth'
 
 const routes = [
   { path: '/', name: 'home', component: HomeView },
@@ -17,8 +18,18 @@ const routes = [
   { path: '/resources/:id', name: 'resource-detail', component: ResourceDetailView },
   { path: '/register', name: 'register', component: RegisterView },
   { path: '/login', name: 'login', component: LoginView },
-  { path: '/account', name: 'account', component: AccountView },
-  { path: '/admin', name: 'admin', component: AdminView },
+  {
+    path: '/account',
+    name: 'account',
+    component: AccountView,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: AdminView,
+    meta: { requiresAuth: true, requiresAdmin: true },
+  },
   { path: '/help', name: 'help', component: HelpView },
   { path: '/:pathMatch(.*)*', name: 'not-found', component: NotFoundView },
 ]
@@ -26,6 +37,18 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+})
+
+router.beforeEach((to) => {
+  const { currentUser, isLoggedIn } = useAuth()
+
+  if (to.meta.requiresAuth && !isLoggedIn.value) {
+    return { name: 'login' }
+  }
+
+  if (to.meta.requiresAdmin && currentUser.value?.role !== 'admin') {
+    return { name: 'account' }
+  }
 })
 
 export default router

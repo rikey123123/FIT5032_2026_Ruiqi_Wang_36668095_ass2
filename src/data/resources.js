@@ -1,4 +1,4 @@
-export const healthResources = [
+export const initialHealthResources = [
   {
     id: 'staying-steady-at-home',
     title: 'Staying steady at home',

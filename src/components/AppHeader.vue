@@ -3,7 +3,7 @@ import { useRouter } from 'vue-router'
 import { useAuth } from '../composables/useAuth'
 
 const router = useRouter()
-const { isLoggedIn, logout } = useAuth()
+const { currentUser, isLoggedIn, logout } = useAuth()
 
 const navigationLinks = [
   { to: '/', label: 'Home' },
@@ -42,20 +42,28 @@ function handleLogout() {
           <RouterLink class="site-navigation__link" to="/account">
             My Account
           </RouterLink>
+          <RouterLink
+            v-if="currentUser?.role === 'admin'"
+            class="site-navigation__link"
+            to="/admin"
+          >
+            Admin Area
+          </RouterLink>
           <button class="site-navigation__button" type="button" @click="handleLogout">
             Log out
           </button>
         </template>
 
-        <RouterLink
-          v-for="link in guestNavigationLinks"
-          v-else
-          :key="link.to"
-          :to="link.to"
-          class="site-navigation__link"
-        >
-          {{ link.label }}
-        </RouterLink>
+        <template v-else>
+          <RouterLink
+            v-for="link in guestNavigationLinks"
+            :key="link.to"
+            :to="link.to"
+            class="site-navigation__link"
+          >
+            {{ link.label }}
+          </RouterLink>
+        </template>
       </nav>
     </div>
   </header>
