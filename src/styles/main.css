@@ -268,6 +268,12 @@
   font-size: 0.95rem;
 }
 
+.resource-card__rating,
+.rating-summary {
+  color: #14513f;
+  font-weight: 700;
+}
+
 .resource-card__link {
   align-self: start;
   font-weight: 700;
@@ -304,6 +310,55 @@
   margin-top: 1.25rem;
 }
 
+.rating-section {
+  max-width: 46rem;
+  margin-top: 2.5rem;
+}
+
+.rating-form {
+  display: grid;
+  gap: 1rem;
+  border-top: 1px solid #d1ddd5;
+  padding-top: 1.5rem;
+}
+
+.rating-form fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.rating-form legend {
+  font-weight: 700;
+}
+
+.rating-options {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.rating-options label {
+  display: flex;
+  min-height: 2.75rem;
+  gap: 0.3rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #9fb3a7;
+  border-radius: 4px;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.rating-options input {
+  accent-color: #1f6b57;
+}
+
+.rating-current {
+  color: #53645a;
+}
+
 .account-details {
   display: grid;
   max-width: 38rem;
@@ -332,6 +387,32 @@
   display: grid;
   gap: 1rem;
   max-width: 38rem;
+}
+
+.account-ratings {
+  max-width: 38rem;
+  margin-bottom: 1.5rem;
+}
+
+.account-ratings h2 {
+  color: #24312b;
+  font-size: 1.25rem;
+  margin: 0 0 0.75rem;
+}
+
+.account-ratings__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.account-ratings__list li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  justify-content: space-between;
+  border-bottom: 1px solid #d1ddd5;
+  padding: 0.75rem 0;
 }
 
 .admin-form {

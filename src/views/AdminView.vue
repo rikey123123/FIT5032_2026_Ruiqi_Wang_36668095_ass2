@@ -1,9 +1,11 @@
 <script setup>
 import { reactive, ref } from 'vue'
 import { resourceCategories } from '../data/resources'
+import { useRatings } from '../composables/useRatings'
 import { useResources } from '../composables/useResources'
 
 const { addResource, removeResource, resources } = useResources()
+const { removeRatingsForResource } = useRatings()
 const categories = resourceCategories.filter((category) => category !== 'All')
 
 const form = reactive({
@@ -89,6 +91,7 @@ function deleteResource(resourceId) {
     return
   }
 
+  removeRatingsForResource(resourceId)
   feedback.value = 'Health resource removed.'
 }
 </script>

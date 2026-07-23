@@ -1,6 +1,7 @@
 const USERS_KEY = 'carebridge-users'
 const CURRENT_USER_KEY = 'carebridge-current-user'
 const RESOURCES_KEY = 'carebridge-resources'
+const RATINGS_KEY = 'carebridge-ratings'
 
 function getStoredArray(key) {
   try {
@@ -66,6 +67,14 @@ export function getStoredResources() {
 
 export function saveResources(resources) {
   return saveStoredArray(RESOURCES_KEY, resources)
+}
+
+export function getStoredRatings() {
+  return getStoredArray(RATINGS_KEY) ?? []
+}
+
+export function saveRatings(ratings) {
+  return saveStoredArray(RATINGS_KEY, ratings)
 }
 
 export function getStoredCurrentUserId() {
