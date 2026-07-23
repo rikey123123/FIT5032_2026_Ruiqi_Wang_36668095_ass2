@@ -3,6 +3,7 @@ import { reactive, ref } from 'vue'
 import { resourceCategories } from '../data/resources'
 import { useRatings } from '../composables/useRatings'
 import { useResources } from '../composables/useResources'
+import { containsHtml, INPUT_LIMITS } from '../utils/validation'
 
 const { addResource, removeResource, resources } = useResources()
 const { removeRatingsForResource } = useRatings()
@@ -17,6 +18,7 @@ const form = reactive({
 
 const errors = reactive({
   title: '',
+  category: '',
   summary: '',
   content: '',
   form: '',
@@ -32,23 +34,38 @@ function clearError(field) {
 
 function validateForm() {
   errors.title = ''
+  errors.category = ''
   errors.summary = ''
   errors.content = ''
   errors.form = ''
 
-  if (!form.title.trim()) {
-    errors.title = 'Enter a resource title.'
+  errors.title = validateText(form.title, 'a resource title', INPUT_LIMITS.resourceTitle)
+  errors.summary = validateText(form.summary, 'a short summary', INPUT_LIMITS.resourceSummary)
+  errors.content = validateText(form.content, 'the resource content', INPUT_LIMITS.resourceContent)
+
+  if (!categories.includes(form.category)) {
+    errors.category = 'Choose a valid resource category.'
   }
 
-  if (!form.summary.trim()) {
-    errors.summary = 'Enter a short summary.'
+  return !errors.title && !errors.category && !errors.summary && !errors.content
+}
+
+function validateText(value, label, limit) {
+  const text = value.trim()
+
+  if (!text) {
+    return `Enter ${label}.`
   }
 
-  if (!form.content.trim()) {
-    errors.content = 'Enter the resource content.'
+  if (text.length > limit) {
+    return `Use no more than ${limit} characters.`
   }
 
-  return !errors.title && !errors.summary && !errors.content
+  if (containsHtml(text)) {
+    return 'HTML tags are not allowed.'
+  }
+
+  return ''
 }
 
 function resetForm() {
@@ -113,6 +130,7 @@ function deleteResource(resourceId) {
           v-model="form.title"
           :aria-describedby="errors.title ? 'resource-title-error' : undefined"
           :aria-invalid="Boolean(errors.title)"
+          :maxlength="INPUT_LIMITS.resourceTitle"
           type="text"
           @input="clearError('title')"
         />
@@ -123,11 +141,20 @@ function deleteResource(resourceId) {
 
       <div class="form-field">
         <label for="admin-resource-category">Resource category</label>
-        <select id="admin-resource-category" v-model="form.category">
+        <select
+          id="admin-resource-category"
+          v-model="form.category"
+          :aria-describedby="errors.category ? 'resource-category-error' : undefined"
+          :aria-invalid="Boolean(errors.category)"
+          @change="clearError('category')"
+        >
           <option v-for="category in categories" :key="category" :value="category">
             {{ category }}
           </option>
         </select>
+        <p v-if="errors.category" id="resource-category-error" class="field-error" role="alert">
+          {{ errors.category }}
+        </p>
       </div>
 
       <div class="form-field">
@@ -137,6 +164,7 @@ function deleteResource(resourceId) {
           v-model="form.summary"
           :aria-describedby="errors.summary ? 'resource-summary-error' : undefined"
           :aria-invalid="Boolean(errors.summary)"
+          :maxlength="INPUT_LIMITS.resourceSummary"
           @input="clearError('summary')"
         />
         <p v-if="errors.summary" id="resource-summary-error" class="field-error" role="alert">
@@ -151,6 +179,7 @@ function deleteResource(resourceId) {
           v-model="form.content"
           :aria-describedby="errors.content ? 'resource-content-error' : undefined"
           :aria-invalid="Boolean(errors.content)"
+          :maxlength="INPUT_LIMITS.resourceContent"
           @input="clearError('content')"
         />
         <p v-if="errors.content" id="resource-content-error" class="field-error" role="alert">

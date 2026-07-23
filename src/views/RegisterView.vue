@@ -1,6 +1,7 @@
 <script setup>
 import { reactive, ref } from 'vue'
 import { getStoredUsers, saveUsers } from '../utils/storage'
+import { containsHtml, INPUT_LIMITS } from '../utils/validation'
 
 const form = reactive({
   fullName: '',
@@ -38,10 +39,16 @@ function validateForm() {
 
   if (!fullName) {
     errors.fullName = 'Enter your full name.'
+  } else if (fullName.length > INPUT_LIMITS.fullName) {
+    errors.fullName = `Use no more than ${INPUT_LIMITS.fullName} characters.`
+  } else if (containsHtml(fullName)) {
+    errors.fullName = 'HTML tags are not allowed in your name.'
   }
 
   if (!email) {
     errors.email = 'Enter your email address.'
+  } else if (email.length > INPUT_LIMITS.email) {
+    errors.email = `Use no more than ${INPUT_LIMITS.email} characters.`
   } else if (!emailPattern.test(email)) {
     errors.email = 'Enter an email address in a valid format.'
   } else if (getStoredUsers().some((user) => user.email === email)) {
@@ -52,6 +59,8 @@ function validateForm() {
     errors.password = 'Enter a password.'
   } else if (form.password.length < 8) {
     errors.password = 'Use a password with at least 8 characters.'
+  } else if (form.password.length > INPUT_LIMITS.password) {
+    errors.password = `Use no more than ${INPUT_LIMITS.password} characters.`
   }
 
   if (!form.confirmPassword) {
@@ -114,6 +123,7 @@ function submitRegistration() {
           :aria-describedby="errors.fullName ? 'full-name-error' : undefined"
           :aria-invalid="Boolean(errors.fullName)"
           autocomplete="name"
+          :maxlength="INPUT_LIMITS.fullName"
           type="text"
           @input="clearError('fullName')"
         />
@@ -131,6 +141,7 @@ function submitRegistration() {
           :aria-invalid="Boolean(errors.email)"
           autocomplete="email"
           inputmode="email"
+          :maxlength="INPUT_LIMITS.email"
           type="email"
           @input="clearError('email')"
         />
@@ -147,6 +158,7 @@ function submitRegistration() {
           :aria-describedby="errors.password ? 'password-error' : undefined"
           :aria-invalid="Boolean(errors.password)"
           autocomplete="new-password"
+          :maxlength="INPUT_LIMITS.password"
           type="password"
           @input="clearError('password')"
         />
@@ -163,6 +175,7 @@ function submitRegistration() {
           :aria-describedby="errors.confirmPassword ? 'confirm-password-error' : undefined"
           :aria-invalid="Boolean(errors.confirmPassword)"
           autocomplete="new-password"
+          :maxlength="INPUT_LIMITS.password"
           type="password"
           @input="clearError('confirmPassword')"
         />

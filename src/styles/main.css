@@ -6,6 +6,23 @@
   min-height: 100vh;
 }
 
+.skip-link {
+  position: absolute;
+  top: -4rem;
+  left: 1rem;
+  z-index: 10;
+  border: 1px solid #14513f;
+  border-radius: 4px;
+  background: #ffffff;
+  color: #14513f;
+  padding: 0.5rem 0.75rem;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
 .site-header {
   background: #ffffff;
   border-bottom: 1px solid #d1ddd5;
@@ -14,13 +31,15 @@
 .site-header__content,
 .page-content > section,
 .site-footer__content {
-  width: min(100% - 2rem, 72rem);
+  width: calc(100% - 2rem);
+  max-width: 72rem;
   margin: 0 auto;
 }
 
 .site-header__content {
   display: flex;
   flex-direction: column;
+  min-width: 0;
   gap: 0.9rem;
   padding: 1rem 0;
 }
@@ -34,6 +53,8 @@
 
 .site-navigation {
   display: grid;
+  width: 100%;
+  min-width: 0;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.25rem;
 }
@@ -49,6 +70,7 @@
   padding: 0.45rem 0.35rem;
   text-align: center;
   text-decoration: none;
+  overflow-wrap: anywhere;
 }
 
 .site-navigation__link:hover,
@@ -60,6 +82,7 @@
 
 .page-content {
   flex: 1;
+  min-width: 0;
   padding: 2.5rem 0;
 }
 
@@ -73,6 +96,36 @@
 .page-content p {
   max-width: 46rem;
   margin: 0;
+}
+
+.home-hero {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+}
+
+.home-hero__copy {
+  display: grid;
+  gap: 1rem;
+}
+
+.home-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+.text-link {
+  font-weight: 700;
+}
+
+.home-hero__image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 6px;
+  object-fit: cover;
 }
 
 .page-introduction {
@@ -208,6 +261,7 @@
 .service-card {
   display: flex;
   flex-direction: column;
+  min-width: 0;
   gap: 0.85rem;
   border: 1px solid #d1ddd5;
   border-radius: 6px;
@@ -241,6 +295,7 @@
 .resource-card {
   display: flex;
   flex-direction: column;
+  min-width: 0;
   gap: 0.85rem;
   border: 1px solid #d1ddd5;
   border-radius: 6px;
@@ -508,7 +563,7 @@
   .site-header__content,
   .page-content > section,
   .site-footer__content {
-    width: min(100% - 3rem, 72rem);
+    width: calc(100% - 3rem);
   }
 
   .service-grid,
@@ -540,6 +595,10 @@
 
   .page-content {
     padding: 3.5rem 0;
+  }
+
+  .home-hero {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .content-filters {
