@@ -6,6 +6,7 @@ import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import NotFoundView from '../views/NotFoundView.vue'
 import RegisterView from '../views/RegisterView.vue'
+import ResourceDetailView from '../views/ResourceDetailView.vue'
 import ResourcesView from '../views/ResourcesView.vue'
 import SupportView from '../views/SupportView.vue'
 
@@ -13,6 +14,7 @@ const routes = [
   { path: '/', name: 'home', component: HomeView },
   { path: '/support', name: 'support', component: SupportView },
   { path: '/resources', name: 'resources', component: ResourcesView },
+  { path: '/resources/:id', name: 'resource-detail', component: ResourceDetailView },
   { path: '/register', name: 'register', component: RegisterView },
   { path: '/login', name: 'login', component: LoginView },
   { path: '/account', name: 'account', component: AccountView },

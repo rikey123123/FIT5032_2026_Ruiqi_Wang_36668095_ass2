@@ -36,7 +36,7 @@ function clearFilters() {
       <p>Browse local services for older adults and carers.</p>
     </div>
 
-    <form class="service-filters" @submit.prevent>
+    <form class="content-filters" @submit.prevent>
       <label class="filter-field" for="service-search">
         Search services
         <input
